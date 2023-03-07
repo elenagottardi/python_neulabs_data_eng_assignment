@@ -19,4 +19,6 @@ weekday (1:mon-7:sun)
 
 ### Solution
 
-...
+I decided to use Python.
+
+see task_02.py 
