@@ -14,15 +14,4 @@ Analyse the main features of a data lake structured following the medallion arch
 
 ## Solution
 
-A data lake is a repository that contains large amounts of data non processed (data that has not yet been processed for a specific purpose) and in native format.
-A data lake is "schema on read": data are transformed only when they need to be analyzed.
-
-A data warehouse is a repository that contains large amounts of data too, but it contains structured data.
-A data warehouse is "schema on write": data are transformed before being added into the data warehouse.
-
-The medallion architecture divides data according to its quality.
-The levels are: bronze, silver and gold.
-The bronze level contains raw data (from batch and streaming extraction).
-The silver level contains cleansed and conformed data.
-The gold level contains curated business-level data.
-In other words, the medallion architecture is a data design pattern sed to logically organize data in a lakehouse, with the goal of incrementally and progressively improving the structure and quality of data as it flows through each layer of the architecture.
+see task_01.txt
