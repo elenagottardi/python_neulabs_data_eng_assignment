@@ -11,13 +11,13 @@ def main():
     print(f'Note: EXTRACT')
     df1 = pd.read_json('data/orders.json', lines=True)
 
-    # create shipping_address composed column as dataframe
+    # get shipping_address composed column as dataframe
     dict_shipping_address = df1.ShippingAddress
     df_shipping_address = pd.DataFrame(columns=['StateOrRegion', 'PostalCode', 'City', 'CountryCode'])
     for key, value in dict_shipping_address.items():
         df_shipping_address = pd.concat([df_shipping_address, pd.DataFrame([value])], axis=0)
 
-    # create order total composed column as dataframe
+    # get order total composed column as dataframe
     dict_order_total = df1.OrderTotal
     df_order_total = pd.DataFrame(columns=['CurrencyCode', 'Amount'])
     for key, value in dict_order_total.items():
@@ -32,8 +32,8 @@ def main():
     df_tot_00 = pd.merge(df1, df_shipping_address, left_index=True, right_index=True)
     # add new columns from order total
     df_tot = pd.merge(df_tot_00, df_order_total, left_index=True, right_index=True)
-    # df_tot.head()
 
+    # set type format
     # datetime
     df_tot['ShipDate'] = pd.to_datetime(df_tot['ShipDate'])
     df_tot['LatestShipDate'] = pd.to_datetime(df_tot['LatestShipDate'])
@@ -71,6 +71,8 @@ def main():
 
     # add YearWeek column that refers to PurchaseDate
     df_tot_nodups['Weekday'] = df_tot_nodups['PurchaseDate'].dt.dayofweek
+
+    # see output info
     df_tot_nodups.info()
 
     #############################
@@ -79,6 +81,7 @@ def main():
     print(f'Note: LOAD')
 
     df_tot_nodups.to_csv('data_out.csv', index=False, encoding='utf-8')
+
 
 # MAIN
 if __name__ == '__main__':
